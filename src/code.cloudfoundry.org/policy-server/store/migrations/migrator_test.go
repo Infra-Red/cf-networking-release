@@ -28,7 +28,6 @@ type columnUsage struct {
 }
 
 var _ = Describe("migrations", func() {
-
 	var (
 		dbConf                     db.Config
 		realDb                     *db.ConnWrapper
@@ -67,14 +66,14 @@ var _ = Describe("migrations", func() {
 		legacyMigrations = append(
 			migrations.V1LegacyMigrationsToPerform,
 			migrations.V2LegacyMigrationsToPerform[0],
-			migrations.V2LegacyMigrationsToPerform[1], //a
-			migrations.V2LegacyMigrationsToPerform[2], //b
-			migrations.V2LegacyMigrationsToPerform[3], //c
-			migrations.V2LegacyMigrationsToPerform[4], //d
-			migrations.V2LegacyMigrationsToPerform[5], //e
-			migrations.V2LegacyMigrationsToPerform[6], //f
+			migrations.V2LegacyMigrationsToPerform[1], // a
+			migrations.V2LegacyMigrationsToPerform[2], // b
+			migrations.V2LegacyMigrationsToPerform[3], // c
+			migrations.V2LegacyMigrationsToPerform[4], // d
+			migrations.V2LegacyMigrationsToPerform[5], // e
+			migrations.V2LegacyMigrationsToPerform[6], // f
 			migrations.V3LegacyMigrationsToPerform[0],
-			migrations.V3LegacyMigrationsToPerform[1], //a
+			migrations.V3LegacyMigrationsToPerform[1], // a
 		)
 		legacyMigrations = append(legacyMigrations,
 			migrations.MigrationsToPerform...)
@@ -491,7 +490,7 @@ var _ = Describe("migrations", func() {
 					Expect(err).NotTo(HaveOccurred())
 
 					By("performing migration")
-					numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 2) //v3
+					numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 2) // v3
 					Expect(err).NotTo(HaveOccurred())
 					Expect(numMigrations).To(Equal(2))
 
@@ -599,7 +598,7 @@ var _ = Describe("migrations", func() {
 					Expect(err).NotTo(HaveOccurred())
 
 					By("performing migration")
-					numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 2) //v3
+					numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 2) // v3
 					Expect(err).NotTo(HaveOccurred())
 					Expect(numMigrations).To(Equal(2))
 
@@ -1401,9 +1400,7 @@ var _ = Describe("migrations", func() {
 
 		Describe("V22 through 50 - ID to GUID Named Destination", func() {
 			Context("mysql", func() {
-				var (
-					terminalId int64
-				)
+				var terminalId int64
 
 				BeforeEach(func() {
 					By("performing migration")
@@ -1506,7 +1503,6 @@ var _ = Describe("migrations", func() {
 				By("verifying that, for old rows, the guid is just the numeric id")
 				guid := queryTableForColumnValues("egress_policies", "guid", realDb)
 				Expect(guid).To(ConsistOf("1"))
-
 			})
 		})
 
@@ -1731,7 +1727,6 @@ var _ = Describe("migrations", func() {
 				}
 			})
 			It("should delete the sole stored procedure in the database", func() {
-
 				By("Looking for existing procedures")
 				migrateTo("65")
 				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='%s'", dbConf.DatabaseName)
@@ -1767,188 +1762,6 @@ var _ = Describe("migrations", func() {
 					VALUES ('asg-guid', 'my-group', '%s', true, true, '["space-a"]', '["space-b"]')`,
 					rules))
 				Expect(err).NotTo(HaveOccurred())
-			})
-		})
-
-		Describe("V68 - Remove Dynamic Egress Table - apps", func() {
-			It("should migrate", func() {
-				table_name := "apps"
-				By("performing migration")
-				migrateTo("67")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V69 - Remove Dynamic Egress Table - destination_metadatas", func() {
-			It("should migrate", func() {
-				table_name := "destination_metadatas"
-				By("performing migration")
-				migrateTo("68")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V70 - Remove Dynamic Egress Table - ip_ranges", func() {
-			It("should migrate", func() {
-				table_name := "ip_ranges"
-				By("performing migration")
-				migrateTo("69")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V71 - Remove Dynamic Egress Table - spaces", func() {
-			It("should migrate", func() {
-				table_name := "spaces"
-				By("performing migration")
-				migrateTo("70")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V72 - Remove Dynamic Egress Table - egress_policies", func() {
-			It("should migrate", func() {
-				table_name := "egress_policies"
-				By("performing migration")
-				migrateTo("71")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V73 - Remove Dynamic Egress Table - defaults", func() {
-			It("should migrate", func() {
-				table_name := "defaults"
-				By("performing migration")
-				migrateTo("72")
-
-				By("Looking for existing Dynamic Egress Tables")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
-			})
-		})
-
-		Describe("V74 - Remove Dynamic Egress Table - terminals", func() {
-			It("should migrate", func() {
-				table_name := "terminals"
-				By("performing migration")
-				migrateTo("73")
-
-				By("Looking for existing Dynamic Egress Table")
-				query := fmt.Sprintf("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME = '%s'", dbConf.DatabaseName, table_name)
-				var count int
-				err := realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(1))
-
-				By("performing migration")
-				numMigrations, err := migrator.PerformMigrations(realDb.DriverName(), realDb, 1)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(numMigrations).To(Equal(1))
-
-				By("Confirming table was deleted")
-				err = realDb.QueryRow(query).Scan(&count)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(count).To(Equal(0))
-
 			})
 		})
 
@@ -2052,7 +1865,6 @@ var _ = Describe("migrations", func() {
 					Eventually(done, 10*time.Second).Should(BeClosed())
 				})
 			})
-
 		})
 
 		Context("when getting migrations to perform fails", func() {
