@@ -8,7 +8,7 @@ import (
 	dbHelper "code.cloudfoundry.org/cf-networking-helpers/db"
 	dbfakes "code.cloudfoundry.org/cf-networking-helpers/db/fakes"
 	"code.cloudfoundry.org/cf-networking-helpers/testsupport"
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/policy-server/store"
 	"code.cloudfoundry.org/policy-server/store/fakes"
 	testhelpers "code.cloudfoundry.org/test-helpers"
@@ -35,7 +35,7 @@ func dumpQueries(realDb *dbHelper.ConnWrapper) {
 		}
 
 		if info == nil {
-			var none = "<null>"
+			none := "<null>"
 			info = &none
 		}
 		fmt.Printf("%s, %s, %s, %s, %s, %s, %s\n", *id, *user, *host, *db, *command, *state, *info)
@@ -493,22 +493,20 @@ var _ = Describe("EgressDestinationStore", func() {
 		})
 
 		Context("Update", func() {
-			var (
-				destinationsToUpdate = []store.EgressDestination{
-					{
-						Name:        "dupe",
-						Description: " ",
-						Rules: []store.EgressDestinationRule{
-							{
-								Protocol: "icmp",
-								IPRanges: []store.IPRange{{Start: "2.2.2.4", End: "2.2.2.5"}},
-								ICMPType: 11,
-								ICMPCode: 14,
-							},
+			destinationsToUpdate := []store.EgressDestination{
+				{
+					Name:        "dupe",
+					Description: " ",
+					Rules: []store.EgressDestinationRule{
+						{
+							Protocol: "icmp",
+							IPRanges: []store.IPRange{{Start: "2.2.2.4", End: "2.2.2.5"}},
+							ICMPType: 11,
+							ICMPCode: 14,
 						},
 					},
-				}
-			)
+				},
+			}
 			Context("when the transaction cannot be created", func() {
 				BeforeEach(func() {
 					mockDB.BeginxReturns(nil, errors.New("can't create a transaction"))

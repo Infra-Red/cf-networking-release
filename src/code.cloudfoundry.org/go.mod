@@ -30,18 +30,22 @@ require (
 	github.com/benjamintf1/unmarshalledmatchers v1.0.0
 	github.com/cf-container-networking/sql-migrate v0.0.0-20191108002617-83f2bdabdc5d
 	github.com/cloudfoundry-community/go-uaa v0.3.2
+	github.com/cloudfoundry-incubator/cf-test-helpers v1.0.0
 	github.com/cloudfoundry/cf-test-helpers/v2 v2.8.0
 	github.com/cloudfoundry/dropsonde v1.1.0
 	github.com/containernetworking/cni v1.1.2
 	github.com/containernetworking/plugins v1.3.0
 	github.com/coreos/go-iptables v0.7.0
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/golang/protobuf v1.5.3
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/lib/pq v1.10.9
 	github.com/montanaflynn/stats v0.7.1
 	github.com/nats-io/gnatsd v1.4.1
 	github.com/nats-io/go-nats v1.8.1
 	github.com/nats-io/nats-top v0.6.1
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
+	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.28.1
 	github.com/pivotal-cf-experimental/gomegamatchers v0.0.0-20180326192815-e36bfcc98c3a
@@ -68,8 +72,8 @@ require (
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/sonde-go v0.0.0-20230911203642-fa89d986ae20 // indirect
 	github.com/cockroachdb/apd v1.1.0 // indirect
+	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
-	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/go-test/deep v1.1.0 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
@@ -80,8 +84,8 @@ require (
 	github.com/gorilla/mux v1.6.2 // indirect
 	github.com/jackc/fake v0.0.0-20150926172116-812a484cc733 // indirect
 	github.com/jackc/pgx v3.6.2+incompatible // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
+	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/openzipkin/zipkin-go v0.4.2 // indirect
 	github.com/square/certstrap v1.3.0 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
@@ -94,5 +98,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/gorp.v1 v1.7.2 // indirect
+	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -8,7 +8,7 @@ import (
 	"code.cloudfoundry.org/cf-networking-helpers/db"
 	dbfakes "code.cloudfoundry.org/cf-networking-helpers/db/fakes"
 	"code.cloudfoundry.org/cf-networking-helpers/testsupport"
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/policy-server/store"
 	testhelpers "code.cloudfoundry.org/test-helpers"
 
@@ -66,9 +66,7 @@ var _ = Describe("Terminal Table", func() {
 		})
 
 		Context("Delete", func() {
-			var (
-				terminalID string
-			)
+			var terminalID string
 
 			BeforeEach(func() {
 				var err error

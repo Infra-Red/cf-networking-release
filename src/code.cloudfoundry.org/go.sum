@@ -659,6 +659,8 @@ github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5P
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
 github.com/cloudfoundry-community/go-uaa v0.3.2 h1:tZOyzrWuTRo02IwcUbIiNy9+ghgjHhLhe3/B04Wfg1w=
 github.com/cloudfoundry-community/go-uaa v0.3.2/go.mod h1:G2QAAVe4I+AZf4yF2EGGUFb/X98nTLWrqscILUznX88=
+github.com/cloudfoundry-incubator/cf-test-helpers v1.0.0 h1:vk4gthT4ime81HI16e8MLctmjZE4U5EMuM90vs1dO4E=
+github.com/cloudfoundry-incubator/cf-test-helpers v1.0.0/go.mod h1:I21tkmFwW9F06eYcQm5GTUzNV+pc1Q5NVZ1qhWOGGx0=
 github.com/cloudfoundry/cf-test-helpers/v2 v2.8.0 h1:aEuDiAhQdwwY2tu3ivfm4KHQBG0Kzp2m+qCNjaWDB+0=
 github.com/cloudfoundry/cf-test-helpers/v2 v2.8.0/go.mod h1:wrmHE+cHE6J72feYGE98GmsyLkYEUbK9OOkD96XK7FA=
 github.com/cloudfoundry/dropsonde v1.0.0/go.mod h1:6zwvrWK5TpxBVYi1cdkE5WDsIO8E0n7qAJg3wR9B67c=
@@ -703,6 +705,7 @@ github.com/fogleman/gg v1.3.0/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzP
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/fsnotify/fsnotify v1.5.1 h1:mZcQUHVQUQWoPXXtuf9yuEXKudkV2sx1E06UadKWpgI=
+github.com/fsnotify/fsnotify v1.5.1/go.mod h1:T3375wBYaZdLLcVNkcVbzGHY7f1l/uK5T5Ai1i3InKU=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/go-fonts/dejavu v0.1.0/go.mod h1:4Wt4I4OU2Nq9asgDCteaAaWZOV24E+0/Pwo0gppep4g=
 github.com/go-fonts/latin-modern v0.2.0/go.mod h1:rQVLdDMK+mK1xscDwsqM5J8U2jrRa3T0ecnM9pNujks=

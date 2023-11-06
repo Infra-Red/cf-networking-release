@@ -8,7 +8,7 @@ import (
 	"code.cloudfoundry.org/cf-networking-helpers/db"
 	dbfakes "code.cloudfoundry.org/cf-networking-helpers/db/fakes"
 	"code.cloudfoundry.org/cf-networking-helpers/testsupport"
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/policy-server/store"
 	"code.cloudfoundry.org/policy-server/store/fakes"
 	testhelpers "code.cloudfoundry.org/test-helpers"
@@ -43,7 +43,7 @@ var _ = Describe("Egress Policy Table", func() {
 	}
 
 	setupEgressPolicyStore := func(db store.Database) store.EgressPolicyStore {
-		var currentGUID = 0
+		currentGUID := 0
 		fakeGUIDGenerator = &fakes.GUIDGenerator{}
 		fakeGUIDGenerator.NewStub = func() string {
 			currentGUID++
@@ -345,7 +345,7 @@ var _ = Describe("Egress Policy Table", func() {
 			Expect(err).ToNot(HaveOccurred())
 			Expect(inUse).To(BeTrue())
 
-			By("returns false if the terminal is not in use by an egress policy") //combined because db's are slow
+			By("returns false if the terminal is not in use by an egress policy") // combined because db's are slow
 			inUse, err = egressPolicyTable.IsTerminalInUse(tx, "some-term-guid")
 			Expect(err).ToNot(HaveOccurred())
 			Expect(inUse).To(BeFalse())
@@ -1331,7 +1331,6 @@ var _ = Describe("Egress Policy Table", func() {
 				})
 			})
 		})
-
 	})
 
 	Context("when the query fails", func() {
