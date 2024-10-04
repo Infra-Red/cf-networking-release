@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"golang.org/x/sys/unix"
+
 	"code.cloudfoundry.org/garden-external-networker/bindmount"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -17,6 +19,13 @@ func sameFile(path1, path2 string) bool {
 	fi2, err := os.Stat(path2)
 	Expect(err).NotTo(HaveOccurred())
 	return os.SameFile(fi1, fi2)
+}
+
+func getInode(path string) uint64 {
+	stat := &unix.Stat_t{}
+	err := unix.Stat(path, stat)
+	Expect(err).NotTo(HaveOccurred())
+	return stat.Ino
 }
 
 var _ = Describe("Mounter", func() {

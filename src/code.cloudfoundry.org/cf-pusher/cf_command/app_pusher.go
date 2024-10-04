@@ -13,6 +13,11 @@ type pushCLIAdapter interface {
 	Push(name, directory, manifestFile string) error
 }
 
+//go:generate counterfeiter -o ../fakes/manifest_generator.go --fake-name ManifestGenerator . manifestGenerator
+type manifestGenerator interface {
+	Generate(manifestStruct interface{}) (string, error)
+}
+
 type AppPusher struct {
 	Applications            []Application
 	Adapter                 pushCLIAdapter

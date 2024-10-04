@@ -3,6 +3,7 @@ package cc_client_test
 import (
 	"encoding/json"
 	"errors"
+	"math"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -1068,6 +1069,10 @@ var _ = Describe("Client", func() {
 		})
 	})
 })
+
+func totalPagesForSet(perPage, setLength int) int {
+	return int(math.Ceil(float64(setLength) / float64(perPage)))
+}
 
 func stubDefaultLastUpdateRequest(fakeInternalJSONClient *fakes.JSONClient) {
 	stubLastUpdateRequestWith(fakeInternalJSONClient, time.Now(), nil)

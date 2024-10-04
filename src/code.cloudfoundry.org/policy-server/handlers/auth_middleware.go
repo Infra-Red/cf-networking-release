@@ -20,6 +20,11 @@ const TokenDataKey = Key("tokenData")
 
 const MAX_REQ_BODY_SIZE = 10 << 20 // 10 MB
 
+//counterfeiter:generate -o fakes/http_handler.go --fake-name HTTPHandler . http_handler
+type http_handler interface {
+	http.Handler
+}
+
 type UAAClient interface {
 	CheckToken(token string) (uaa_client.CheckTokenResponse, error)
 }
@@ -91,6 +96,24 @@ func isAuthorized(scopes, allowedScopes []string) bool {
 			if scope == allowed {
 				return true
 			}
+		}
+	}
+	return false
+}
+
+func isNetworkAdmin(scopes []string) bool {
+	for _, scope := range scopes {
+		if scope == "network.admin" {
+			return true
+		}
+	}
+	return false
+}
+
+func isNetworkWrite(scopes []string) bool {
+	for _, scope := range scopes {
+		if scope == "network.write" {
+			return true
 		}
 	}
 	return false

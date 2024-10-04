@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"strings"
 
+	"code.cloudfoundry.org/cf-networking-helpers/db"
 	"code.cloudfoundry.org/policy-server/api"
 	"code.cloudfoundry.org/policy-server/store"
 	"code.cloudfoundry.org/policy-server/uaa_client"
@@ -13,6 +14,11 @@ import (
 //counterfeiter:generate -o fakes/policy_filter.go --fake-name PolicyFilter . policyFilter
 type policyFilter interface {
 	FilterPolicies(policies []store.Policy, subjectToken uaa_client.CheckTokenResponse) ([]store.Policy, error)
+}
+
+//counterfeiter:generate -o fakes/database.go --fake-name Db . database
+type database interface {
+	Beginx() (db.Transaction, error)
 }
 
 type PoliciesIndex struct {

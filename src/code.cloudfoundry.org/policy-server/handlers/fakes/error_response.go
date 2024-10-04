@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"sync"
 
-	lager "code.cloudfoundry.org/lager/v3"
+	"code.cloudfoundry.org/lager/v3"
 )
 
 type ErrorResponse struct {
