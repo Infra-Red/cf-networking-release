@@ -17,6 +17,7 @@ tags: [cf-networking-release]
    * [<a name="migrations-tables"></a> Migration Related Tables](#a-namemigrations-tablesa-migration-related-tables)
       * [<a name="gorp-mirations-table"></a> gorp_migrations](#a-namegorp-mirations-tablea-gorp_migrations)
       * [<a name="gorp-lock-table"></a> gorp_lock](#a-namegorp-lock-tablea-gorp_lock)
+   * [<a name="dynamic-egress-tables"></a> Dynamic Egress Related Tables](#a-namedynamic-egress-tablesa-dynamic-egress-related-tables)
 
 <!-- vim-markdown-toc -->
 
@@ -226,4 +227,13 @@ mysql> describe gorp_lock;
 |---|---|
 | lock | A value representing the policy-server that is currently running a migration.|
 | applied_at | The time that the policy-server claimed the lock. |
+
+
+## <a name="dynamic-egress-tables"></a> Dynamic Egress Related Tables
+
+There are 7 tables related to dynamic egress policies: apps, defaults, destination_metadatas, egress_policies, ip_ranges, terminals, and spaces. 
+
+Dynamic egress was a beta feature that we are no longer planning on taking GA. These tables should be empty.
+
+
 
